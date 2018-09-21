@@ -26,5 +26,5 @@ npm install
 npm start
 ```
 
-We have included the Bumla (https://bulma.io/documentation/) CSS lib to help you with the style.
+We have included the Bulma (https://bulma.io/documentation/) CSS lib to help you with the style.
 Feel free to use this or rip it out and do your own.

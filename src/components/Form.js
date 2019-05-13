@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 
 class Form extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <form>
-        <label className="label" for="name">
-          Counter Name
-        </label>
-        <input className="input" type="text" placeholder="Counter Name" />
-        <a class="button is-primary">Add</a>
+      <form onSubmit={this.props.onFormSubmit}>
+        <label className="label" htmlFor="name">Counter Name</label>
+        <input onChange={this.props.onFormInput} className="input" name="name" type="text" placeholder="Counter Name" />
+        <button className="button is-primary">Add</button>
       </form>
     );
   }

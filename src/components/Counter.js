@@ -1,8 +1,21 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <input type="number" />;
+    var value = this.props.value
+    var name = this.props.name
+
+    return <input 
+              type="number" 
+              pattern="[0-9]*" 
+              inputmode="numeric"
+              onChange={() => this.props.onCounterChange(name)}
+              defaultValue={value}
+              />;
   }
 }
 

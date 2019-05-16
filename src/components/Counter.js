@@ -7,13 +7,14 @@ class Counter extends Component {
 
   render() {
     var value = this.props.value
-    var name = this.props.name
+    var object = this.props.object
+    var event = this.props.event
 
     return <input 
               type="number" 
               pattern="[0-9]*" 
-              inputmode="numeric"
-              onChange={() => this.props.onCounterChange(name)}
+              inputMode="numeric"
+              onChange={ (event) => this.props.onCounterChange(event, object)}
               defaultValue={value}
               />;
   }

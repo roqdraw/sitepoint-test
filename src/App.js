@@ -12,7 +12,8 @@ class App extends Component {
         // { id: 1, name: "Ben", count: 2 }, 
         // { id: 2, name: "Dan", count: 3 }
       ],
-      totalCount: 0
+      totalCount: 0,
+      object: { name: "MAD", number: 0 }
     }
   }
 
@@ -48,40 +49,25 @@ class App extends Component {
       })
   }
 
-  handleNumberChange = nameSelected => {
-  // handleNumberChange = (nameSelected, id) => {
-  // handleNumberChange = (id, numbers) => {
+  handleNumberChange = (event, nameSelected) => {
 
     // locate where the id = index
     // try the id's count to number + id
 
-    // const prevNameList = this.state.nameList;
-    // this.setState({
-    //   nameList: prevNameList.map((index) => 
-    //       index === id ? event.target : console.log("nope")
-    //     )
-    // })
-
-    // let { value } = event.target;
-    // value = Number(value);
-    // this.setState({ value });
-
-    // var index = this.setState.nameList.findIndex(x => x.id === id);
-    // console.log(index)
-
-    // var prevState = this.state.nameList;
-    // this.setState(prevState => ({
-    //   nameList: {
-    //     ...prevState.nameList,[prevState.nameList[id]]: event.target.value
-    //   }
-    // }))
-
     const prevNames = this.state.nameList;
+
     this.setState({
-      nameList: prevNames.map(object => {
-        object.id === nameSelected.id ? console.log(true) : console.log(false)
+      nameList: prevNames.map(function(lang) {
+        if (lang.id === nameSelected.id) {
+          return {...lang, count: event.target.value}
+        } else {
+          return lang
+        }
       })
     })
+    
+    console.log(event.target.value)
+  
   }
 
   onDeleteHandle = id => {
@@ -97,11 +83,13 @@ class App extends Component {
     var nameList = this.state.nameList;
     var total = nameList.map(name => totalCount += name.count)
 
-    // this.setState({
-    //   totalCount: total
-    // })
-
     return total
+  }
+
+  updateInput = event => {
+    this.setState({
+      object: { ...this.state.object, number: event.target.value }
+    })
   }
 
   render() {
@@ -130,7 +118,7 @@ class App extends Component {
                 <Counter 
                   onCounterChange={this.handleNumberChange}
                   value={object.count}
-                  name={object.name}
+                  object={object}
                 />
                 <button onClick={() => this.onDeleteHandle(index)}>Delete</button>
               </li>
@@ -139,6 +127,9 @@ class App extends Component {
 
           <br />
 
+          <input type="number" placeholder="NUMBER HERE." defaultValue={this.state.object.number} onChange={this.updateInput}></input>
+          {/* <button onClick={console.log(nameList)}>GET</button>     */}
+        
           <p>Names: {nameCounter}</p>
           <p>Total Combined Counts: {this.getTotalCount()}</p>
         </div>

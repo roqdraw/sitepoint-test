@@ -51,10 +51,8 @@ class App extends Component {
 
   handleNumberChange = (event, nameSelected) => {
 
-    // locate where the id = index
-    // try the id's count to number + id
-
     const prevNames = this.state.nameList;
+    // const totalCountCopy = this.state.totalCount;
 
     this.setState({
       nameList: prevNames.map(function(lang) {
@@ -63,7 +61,8 @@ class App extends Component {
         } else {
           return lang
         }
-      })
+      }),
+      // totalCount: totalCountCopy + event.target.value
     })
     
     console.log(event.target.value)
@@ -78,12 +77,28 @@ class App extends Component {
     })
   }
 
-  getTotalCount = () => {
+  getTotalCount = (event, nameSelected) => {
     var totalCount = this.state.totalCount;
-    var nameList = this.state.nameList;
-    var total = nameList.map(name => totalCount += name.count)
+    var prevNames = this.state.nameList;
 
-    return total
+    // var totalCount = 0;
+    
+    // var total = nameList.map(name => totalCount = + totalCount + Number(name.count))
+    // return total
+    
+    // var damn = [];
+    // nameList.map(name => damn.push(name.count))
+    // return damn
+
+    this.setState({
+      nameList: prevNames.map(function(lang) {
+        if (lang.id === nameSelected.id) {
+          return {...lang, count: event.target.value}
+        } else {
+          return lang
+        }
+      })
+    })
   }
 
   updateInput = event => {
@@ -131,7 +146,8 @@ class App extends Component {
           {/* <button onClick={console.log(nameList)}>GET</button>     */}
         
           <p>Names: {nameCounter}</p>
-          <p>Total Combined Counts: {this.getTotalCount()}</p>
+          {/* <p>Total Combined Counts: {this.getTotalCount}</p> */}
+          <p>Total Combined Counts: {nameList.reduce((sum, index) => (sum += Number(index.count)), 0)}</p>
         </div>
       </section>
     );

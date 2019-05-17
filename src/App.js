@@ -72,20 +72,20 @@ class App extends Component {
     })
   }
 
-  getTotalCount = (event, nameSelected) => {
-    var totalCount = this.state.totalCount;
-    var prevNames = this.state.nameList;
+  // getTotalCount = (event, nameSelected) => {
+  //   var totalCount = this.state.totalCount;
+  //   var prevNames = this.state.nameList;
 
-    this.setState({
-      nameList: prevNames.map(function(lang) {
-        if (lang.id === nameSelected.id) {
-          return {...lang, count: event.target.value}
-        } else {
-          return lang
-        }
-      })
-    })
-  }
+  //   this.setState({
+  //     nameList: prevNames.map(function(lang) {
+  //       if (lang.id === nameSelected.id) {
+  //         return {...lang, count: event.target.value}
+  //       } else {
+  //         return lang
+  //       }
+  //     })
+  //   })
+  // }
 
   updateInput = event => {
     this.setState({
@@ -97,7 +97,16 @@ class App extends Component {
 
     var nameList = this.state.nameList;
     var nameCounter = this.state.nameList.length;
-    var totalCount = nameList.reduce((sum, index) => (sum += Number(index.count)), 0)
+    // var totalCount = nameList.reduce((sum, index) => (sum += Number(index.count)), 0)
+
+    var totalCount = 0;
+
+    var totalCountCopy = function() {
+      nameList.forEach(name => {
+        totalCount += Number(name.count)
+      })
+      return totalCount
+    }
 
     return (
       <section className="section">
@@ -132,7 +141,7 @@ class App extends Component {
           {/* <input type="number" placeholder="NUMBER HERE." defaultValue={this.state.object.number} onChange={this.updateInput}></input> */}
         
           <p>Names: {nameCounter}</p>
-          <p>Total Combined Counts: {totalCount}</p>
+          <p>Total Combined Counts: {totalCountCopy()}</p>
         </div>
       </section>
     );

@@ -8,12 +8,9 @@ class App extends Component {
     super(props);
     this.state= {
       name: '',
-      nameList: [
-        // { id: 1, name: "Ben", count: 2 }, 
-        // { id: 2, name: "Dan", count: 3 }
-      ],
+      nameList: [],
       totalCount: 0,
-      object: { name: "MAD", number: 0 }
+      // object: { name: "MAD", number: 0 }
     }
   }
 
@@ -52,7 +49,6 @@ class App extends Component {
   handleNumberChange = (event, nameSelected) => {
 
     const prevNames = this.state.nameList;
-    // const totalCountCopy = this.state.totalCount;
 
     this.setState({
       nameList: prevNames.map(function(lang) {
@@ -61,8 +57,7 @@ class App extends Component {
         } else {
           return lang
         }
-      }),
-      // totalCount: totalCountCopy + event.target.value
+      })
     })
     
     console.log(event.target.value)
@@ -80,15 +75,6 @@ class App extends Component {
   getTotalCount = (event, nameSelected) => {
     var totalCount = this.state.totalCount;
     var prevNames = this.state.nameList;
-
-    // var totalCount = 0;
-    
-    // var total = nameList.map(name => totalCount = + totalCount + Number(name.count))
-    // return total
-    
-    // var damn = [];
-    // nameList.map(name => damn.push(name.count))
-    // return damn
 
     this.setState({
       nameList: prevNames.map(function(lang) {
@@ -111,6 +97,7 @@ class App extends Component {
 
     var nameList = this.state.nameList;
     var nameCounter = this.state.nameList.length;
+    var totalCount = nameList.reduce((sum, index) => (sum += Number(index.count)), 0)
 
     return (
       <section className="section">
@@ -142,12 +129,10 @@ class App extends Component {
 
           <br />
 
-          <input type="number" placeholder="NUMBER HERE." defaultValue={this.state.object.number} onChange={this.updateInput}></input>
-          {/* <button onClick={console.log(nameList)}>GET</button>     */}
+          {/* <input type="number" placeholder="NUMBER HERE." defaultValue={this.state.object.number} onChange={this.updateInput}></input> */}
         
           <p>Names: {nameCounter}</p>
-          {/* <p>Total Combined Counts: {this.getTotalCount}</p> */}
-          <p>Total Combined Counts: {nameList.reduce((sum, index) => (sum += Number(index.count)), 0)}</p>
+          <p>Total Combined Counts: {totalCount}</p>
         </div>
       </section>
     );

@@ -119,7 +119,7 @@ class App extends Component {
           
           <br />
 
-          <p>Names:</p>
+          <p>List of Names:</p>
           <ul>
             {nameList.map((object, index) => {
               return <li 
@@ -140,7 +140,7 @@ class App extends Component {
 
           {/* <input type="number" placeholder="NUMBER HERE." defaultValue={this.state.object.number} onChange={this.updateInput}></input> */}
         
-          <p>Names: {nameCounter}</p>
+          <p>Name Count: {nameCounter}</p>
           <p>Total Combined Counts: {totalCountCopy()}</p>
         </div>
       </section>
